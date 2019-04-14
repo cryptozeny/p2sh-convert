@@ -15,13 +15,17 @@
 				version = decoded['version']
 
 				switch (version) {
-					case 5:
+					case 125: // p2sh-segwit: starting with s (lower)
 						message = "Mainnet p2sh address: ";
-						version = 50;
+						version = 63; // convert to legacy with S (upper)
 						break;
-					case 196:
+					case 128: // p2sh-segwit: starting with t (lower)
 						message = "Testnet p2sh address: ";
-						version = 58;
+						version = 66; // convert to legacy with T (upper)
+						break;
+					case 123: // p2sh-segwit: starting with r (lower)
+						message = "Regtest p2sh address: ";
+						version = 61; // convert to legacy with R (upper)
 						break;
 					default:
 						throw "unknown";
